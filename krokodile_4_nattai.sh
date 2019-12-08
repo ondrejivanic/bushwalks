@@ -43,3 +43,18 @@ nswtopo controls ${map} ${dir}/controls.kml
 
 nswtopo render -o ${map} ${png} ${svg}
 
+map_aerial=${dir}/${dir}_aerial.tgz
+png_aerial=${dir}/${dir}_aerial.png
+
+cp ${map} ${map_aerial}
+
+nswtopo delete ${map_aerial} \
+	nsw.vegetation-spot5 \
+	contours \
+	nsw.topographic.watercourses \
+	nsw.topographic.stock-dams \
+	nsw.topographic.water-areas
+
+nswtopo add --resolution 1.0 ${map_aerial} nsw/aerial
+
+nswtopo render -o ${map_aerial} ${png_aerial}
